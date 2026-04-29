@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.sathyanaarayanan</groupId>
-  <artifactId>CucumberGuiceCoreFramework</artifactId>
-  <version>1.0.0</version>
+  <artifactId>cucumber-guice-core-framework</artifactId>
+  <version>1.0.2</version>
   <packaging>jar</packaging>
 
-  <name>CucumberGuiceUIFramework</name>
+  <name>cucumber-guice-core-framework</name>
   <url>https://github.com/SathyaNaarayanan/CucumberGuiceCoreFramework</url>
 
   <!-- 🔹 GitHub Packages configuration -->
