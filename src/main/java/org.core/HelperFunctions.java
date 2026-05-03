@@ -13,6 +13,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
+import org.testng.Assert;
 
 @Slf4j
 public class HelperFunctions {
@@ -229,6 +230,15 @@ public class HelperFunctions {
         e.sendKeys(path);
     }
 
+    public void compareValue(String expected, String actual){
+        try{
+            Assert.assertEquals(expected, actual);
+        }
+        catch (Exception exception){
+            log.error("error on handling alerts text :", exception);
+            ExtentCucumberAdapter.addTestStepLog("failed : "+exception.getMessage());
+        }
+    }
 
 
 
