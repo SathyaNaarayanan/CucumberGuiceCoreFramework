@@ -6,11 +6,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
 @ScenarioScoped
-public class BaseDriver {
+public class BaseDriver{
+
 
     private WebDriver driver;
 
