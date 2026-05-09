@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /*
@@ -47,12 +50,44 @@ class SafeExecutor {
         }
     }
 
-    public <T> T runWithReturnResult(Supplier<T> action){
+    public <T> T get(Supplier<T> action){
         try{
             return action.get();
         }
         catch(Exception exception){
             log.error("error on value inception :", exception);
+            ExtentCucumberAdapter.addTestStepLog("failed : "+exception.getMessage());
+            throw new RuntimeException(exception);
+        }
+    }
+    public <T, R> R apply (Function<T,R> func, T data){
+        try{
+            return func.apply(data);
+        }
+        catch(Exception exception){
+            log.error("error occured : ", exception);
+            ExtentCucumberAdapter.addTestStepLog("failed : "+exception.getMessage());
+            throw new RuntimeException(exception);
+        }
+    }
+
+    public <T> boolean test(Predicate<T> predicate, T data){
+        try{
+            return predicate.test(data);
+        }
+        catch (Exception exception){
+            log.error("error occured : ", exception);
+            ExtentCucumberAdapter.addTestStepLog("failed : "+exception.getMessage());
+            throw new RuntimeException(exception);
+        }
+    }
+
+    public void accept(Consumer<Object> consumner, Object data){
+        try{
+            consumner.accept(data);
+        }
+        catch (Exception exception){
+            log.error("error occured : ", exception);
             ExtentCucumberAdapter.addTestStepLog("failed : "+exception.getMessage());
             throw new RuntimeException(exception);
         }

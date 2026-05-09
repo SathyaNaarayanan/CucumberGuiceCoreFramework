@@ -2,6 +2,7 @@ package org.core;
 
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -84,7 +85,7 @@ public class HelperFunctions {
     }
 
     public String readAlertText(){
-        String alertText = safeExecutor.runWithReturnResult(() -> {
+        String alertText = safeExecutor.get(() -> {
             explicitWait(10).until(ExpectedConditions.alertIsPresent());
             return alert().getText();
         });
@@ -173,6 +174,34 @@ public class HelperFunctions {
         safeExecutor.run(() -> {
             Assert.assertEquals(expected, actual);
         });
+    }
+
+    public String getText(WebElement e){
+        return safeExecutor.apply(s -> s.getText(), e);
+    }
+
+    public String getTagName(WebElement e){
+        return safeExecutor.apply(s -> s.getTagName(), e);
+    }
+
+    public int getSize(List<WebElement> e){
+        return safeExecutor.apply(s -> s.size(),e);
+    }
+
+    public boolean elementIsDisplayed(WebElement e){
+        return safeExecutor.test(s -> s.isDisplayed(), e);
+    }
+
+    public boolean elementIsSelected(WebElement e){
+        return safeExecutor.test(s -> s.isSelected(), e);
+    }
+
+    public boolean elementIsEnabled(WebElement e){
+        return safeExecutor.test(s -> s.isEnabled(), e);
+    }
+
+    public void returnData(Object data){
+        safeExecutor.accept(e -> e.toString(), data);
     }
 
 }
