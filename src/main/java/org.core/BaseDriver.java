@@ -16,9 +16,6 @@ public class BaseDriver{
 
     private WebDriver driver;
 
-    public BaseDriver(WebDriver driver){
-        this.driver = driver;
-    }
     /*
     Supplier is a lazy initialization.
     Only lambda are stored (no driver created)
