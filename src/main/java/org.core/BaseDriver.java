@@ -5,17 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
-
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 @ScenarioScoped
 public class BaseDriver{
-
-
     private WebDriver driver;
-
     /*
     Supplier is a lazy initialization.
     Only lambda are stored (no driver created)
@@ -32,14 +28,18 @@ public class BaseDriver{
     }
 
     public WebDriver initDriver(String browserType) {
-        if (driver == null) {
-            driver = switch(browserType.toLowerCase()) {
-                case "chrome" -> driverMap.get(browserType).get();
-                case "edge" -> driverMap.get(browserType).get();
-                default -> throw new IllegalStateException("Unexpected value: " + browserType);
-            };
-        }
+//        if (driver == null) {
+//            driver = switch(browserType.toLowerCase()) {
+//                case "chrome" -> driverMap.get(browserType).get();
+//                case "edge" -> driverMap.get(browserType).get();
+//                default -> throw new IllegalStateException("Unexpected value: " + browserType);
+//            };
+//         }
 
+            driver = Optional.ofNullable(driverMap.get(browserType.toLowerCase()))
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Unsupported browser"))
+                    .get();
         return driver;
     }
 

@@ -2,10 +2,10 @@ package org.core;
 
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,7 +13,6 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import org.testng.Assert;
-
 
 @Slf4j
 public class HelperFunctions {
@@ -25,7 +24,7 @@ public class HelperFunctions {
     SafeExecutor safeExecutor;
 
     public WebDriverWait explicitWait(int timeOut) {
-        return new WebDriverWait(driver.getDriver(), Duration.ofSeconds(timeOut));
+            return new WebDriverWait(driver.getDriver(), Duration.ofSeconds(timeOut));
     }
 
     public void implicitWait(int timeOut){
@@ -48,6 +47,7 @@ public class HelperFunctions {
 
     public void scrollToElement(WebElement e){ safeExecutor.run(UiActionMethods.SCROLL_TO_ELEMENT,e,""); }
 
+    public void rightClickAction(WebElement e){ safeExecutor.run(UiActionMethods.CONTEXT_CLICK,e,"");}
     public void dropDownSelectByVisibleText(WebElement e, String text){
         safeExecutor.run(() -> new Select(e).selectByVisibleText(text));
     }
@@ -202,6 +202,18 @@ public class HelperFunctions {
 
     public void returnData(Object data){
         safeExecutor.accept(e -> e.toString(), data);
+    }
+
+
+    public void moveToOffset(WebElement slider, int offset){
+
+        safeExecutor.run(()-> {
+            new Actions(driver.getDriver())
+                    .clickAndHold(slider)
+                    .moveByOffset(offset, 0)
+                    .release()
+                    .perform();
+        });
     }
 
 }

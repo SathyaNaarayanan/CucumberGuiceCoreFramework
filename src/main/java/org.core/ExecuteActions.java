@@ -56,6 +56,10 @@ class ExecuteActions {
                 case SCROLL_TO_ELEMENT -> {
                     actions().scrollToElement(element).build().perform();
                 }
+
+                case CONTEXT_CLICK -> {
+                    actions().contextClick(element).build().perform();
+                }
                 default -> throw new IllegalArgumentException("Invalid action: " + type);
             };
         }

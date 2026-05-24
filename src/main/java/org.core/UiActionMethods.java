@@ -12,5 +12,6 @@ enum UiActionMethods {
     HOVER,
     JS_CLICK,
     SUBMIT,
-    SCROLL_TO_ELEMENT
+    SCROLL_TO_ELEMENT,
+    CONTEXT_CLICK
 }
