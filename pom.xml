@@ -4,7 +4,7 @@
 
   <groupId>com.sathyanaarayanan</groupId>
   <artifactId>cucumber-guice-core-framework</artifactId>
-  <version>1.0.8</version>
+  <version>1.0.9</version>
   <packaging>jar</packaging>
 
   <name>cucumber-guice-core-framework</name>
